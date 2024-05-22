@@ -12,6 +12,7 @@ class DatatableHeader {
   final Widget Function(dynamic value)? headerBuilder;
   final Widget Function(dynamic value, Map<String?, dynamic> row)?
       sourceBuilder;
+  final TextStyle? sourceTextStyle;
   final DataTableFormat format;
   final List<String> items;
   final List<TextInputFormatter>? textInputFormatter;
@@ -25,6 +26,7 @@ class DatatableHeader {
     this.editable = false,
     this.flex = 1,
     this.format = DataTableFormat.normal,
+    this.sourceTextStyle,
     this.headerBuilder,
     this.sourceBuilder,
     this.items = const [],
@@ -40,6 +42,7 @@ class DatatableHeader {
         flex: map['flex'],
         headerBuilder: map['headerBuilder'],
         sourceBuilder: map['sourceBuilder'],
+        sourceTextStyle: map['sourceTextStyle'],
         format: map['format'],
         items: map['items'] ?? [],
       );
@@ -52,6 +55,7 @@ class DatatableHeader {
         "flex": flex,
         "headerBuilder": headerBuilder,
         "sourceBuilder": sourceBuilder,
+        "sourceTextStyle": sourceTextStyle,
         "format": format,
         "items": items,
         "textInputFormatter": textInputFormatter,

@@ -67,7 +67,7 @@ class _DataPageState extends State<DataPage> {
       temps.add({
         "id": i,
         "sku": "$i\000$i",
-        "name": "Product $i",
+        "name": "Product $i with a very long exmaple of source builder here to show how it expand",
         "category": "Category-$i",
         "price": i * 10.00,
         "cost": "20.00",
@@ -161,8 +161,9 @@ class _DataPageState extends State<DataPage> {
           show: true,
           flex: 2,
           sortable: true,
-          editable: true,
+          editable: false,
           textAlign: TextAlign.left,
+          sourceTextStyle:const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
           format: DataTableFormat.number,
           textInputFormatter: []),
       DatatableHeader(

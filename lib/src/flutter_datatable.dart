@@ -225,11 +225,9 @@ class _XDataTableState extends State<XDataTable> {
                             const Spacer(),
                             header.sourceBuilder != null
                                 ? Expanded(
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: header.sourceBuilder!(
-                                          data[header.value], data),
-                                    ),
+                                    flex: header.flex,
+                                    child: header.sourceBuilder!(
+                                        data[header.value], data),
                                   )
                                 : header.editable
                                     ? TextEditableWidget(
@@ -248,7 +246,8 @@ class _XDataTableState extends State<XDataTable> {
                                           style:
                                               widget.selecteds!.contains(data)
                                                   ? widget.selectedTextStyle
-                                                  : widget.rowTextStyle,
+                                                  : header.sourceTextStyle ??
+                                                      widget.rowTextStyle,
                                         ),
                                       )
                           ],
@@ -395,7 +394,7 @@ class _XDataTableState extends State<XDataTable> {
                                       textAlign: header.textAlign,
                                       style: widget.selecteds!.contains(data)
                                           ? widget.selectedTextStyle
-                                          : widget.rowTextStyle,
+                                          :header.sourceTextStyle ?? widget.rowTextStyle,
                                     ),
                         ),
                       )
