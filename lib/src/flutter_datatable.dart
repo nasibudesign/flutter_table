@@ -239,7 +239,7 @@ class _XDataTableState extends State<XDataTable> {
                                     : Expanded(
                                         child: Text(
                                           "${data[header.value]}",
-                                          textAlign: header.textAlign,
+                                          textAlign: TextAlign.end,
                                           style:
                                               widget.selecteds!.contains(data)
                                                   ? widget.selectedTextStyle
@@ -438,10 +438,10 @@ class _XDataTableState extends State<XDataTable> {
               if (widget.autoHeight)
                 Column(
                   children: [
-                      mobileHeader(
-                        showSelect: (widget.showSelect && widget.selecteds != null), 
-                        showSort: (widget.showSort && widget.onSort!=null)
-                        ),
+                    mobileHeader(
+                        showSelect:
+                            (widget.showSelect && widget.selecteds != null),
+                        showSort: (widget.showSort && widget.onSort != null)),
                     if (widget.isLoading) const LinearProgressIndicator(),
                     ...mobileList(),
                   ],
@@ -451,10 +451,10 @@ class _XDataTableState extends State<XDataTable> {
                   child: ListView(
                     /// itemCount: source.length,
                     children: [
-                       mobileHeader(
-                        showSelect: (widget.showSelect && widget.selecteds != null), 
-                        showSort: (widget.showSort && widget.onSort!=null)
-                        ),
+                      mobileHeader(
+                          showSelect:
+                              (widget.showSelect && widget.selecteds != null),
+                          showSort: (widget.showSort && widget.onSort != null)),
                       if (widget.isLoading) const LinearProgressIndicator(),
 
                       /// mobileList
