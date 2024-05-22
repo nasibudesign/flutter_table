@@ -224,8 +224,9 @@ class _XDataTableState extends State<XDataTable> {
                                   ),
                             const Spacer(),
                             header.sourceBuilder != null
-                                ? header.sourceBuilder!(
-                                    data[header.value], data)
+                                ? Expanded(child: 
+                                    header.sourceBuilder!(
+                                      data[header.value], data))
                                 : header.editable
                                     ? TextEditableWidget(
                                         data: data,
