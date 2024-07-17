@@ -324,6 +324,7 @@ class _DataPageState extends State<DataPage> {
                   showSelect: _showSelect,
                   showSort: _showSort,
                   sortText: _sortText,
+                  contentWidget: const Icon(Icons.file_copy),
                   autoHeight: false,
                   dropContainer: (data) {
                     if (int.tryParse(data['id'].toString())!.isEven) {

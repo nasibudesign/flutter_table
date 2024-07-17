@@ -72,6 +72,11 @@ class XDataTable extends StatefulWidget {
   /// is the time that is restored to the start date in the date inputs
   final Duration timeToSubtract;
 
+  ///`contentWidget`
+  ///
+  ///this is to display a widget between the rows and the header of the datatable
+  final Widget? contentWidget;
+
   const XDataTable({
     Key? key,
     this.showSelect = false,
@@ -109,6 +114,7 @@ class XDataTable extends StatefulWidget {
     this.headerTextStyle,
     this.rowTextStyle,
     this.selectedTextStyle,
+    this.contentWidget,
     this.timeToSubtract = const Duration(seconds: 0),
   }) : super(key: key);
 
@@ -394,7 +400,8 @@ class _XDataTableState extends State<XDataTable> {
                                       textAlign: header.textAlign,
                                       style: widget.selecteds!.contains(data)
                                           ? widget.selectedTextStyle
-                                          :header.sourceTextStyle ?? widget.rowTextStyle,
+                                          : header.sourceTextStyle ??
+                                              widget.rowTextStyle,
                                     ),
                         ),
                       )
@@ -447,6 +454,7 @@ class _XDataTableState extends State<XDataTable> {
                             (widget.showSelect && widget.selecteds != null),
                         showSort: (widget.showSort && widget.onSort != null)),
                     if (widget.isLoading) const LinearProgressIndicator(),
+                    if (widget.contentWidget!=null) widget.contentWidget??const SizedBox(),
                     ...mobileList(),
                   ],
                 ),
@@ -460,7 +468,7 @@ class _XDataTableState extends State<XDataTable> {
                               (widget.showSelect && widget.selecteds != null),
                           showSort: (widget.showSort && widget.onSort != null)),
                       if (widget.isLoading) const LinearProgressIndicator(),
-
+                      if (widget.contentWidget!=null) widget.contentWidget??const SizedBox(),
                       /// mobileList
                       ...mobileList(),
                     ],
@@ -500,6 +508,8 @@ class _XDataTableState extends State<XDataTable> {
               if (widget.headers.isNotEmpty) desktopHeader(),
 
               if (widget.isLoading) const LinearProgressIndicator(),
+              
+              if (widget.contentWidget!=null) widget.contentWidget??const SizedBox(),
 
               if (widget.autoHeight) Column(children: desktopList()),
 
