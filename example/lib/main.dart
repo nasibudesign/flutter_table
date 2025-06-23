@@ -9,6 +9,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
 }
 
 class DataPage extends StatefulWidget {
-  DataPage({Key? key}) : super(key: key);
+  const DataPage({Key? key}) : super(key: key);
   @override
   _DataPageState createState() => _DataPageState();
 }
@@ -89,7 +91,7 @@ class _DataPageState extends State<DataPage> {
     _expanded = List.generate(_currentPerPage!, (index) => false);
 
     setState(() => _isLoading = true);
-    Future.delayed(Duration(seconds: 3)).then((value) {
+    Future.delayed(const Duration(seconds: 3)).then((value) {
       _sourceOriginal.clear();
       _sourceOriginal.addAll(_generateData(n: random.nextInt(10000)));
       _sourceFiltered = _sourceOriginal;
@@ -103,7 +105,7 @@ class _DataPageState extends State<DataPage> {
     setState(() => _isLoading = true);
     var _expandedLen =
         _total - start < _currentPerPage! ? _total - start : _currentPerPage;
-    Future.delayed(Duration(seconds: 0)).then((value) {
+    Future.delayed(const Duration(seconds: 0)).then((value) {
       _expanded = List.generate(_expandedLen as int, (index) => false);
       _source.clear();
       _source = _sourceFiltered.getRange(start, start + _expandedLen).toList();
@@ -241,11 +243,11 @@ class _DataPageState extends State<DataPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("RESPONSIVE DATA TABLE"),
+        title: const Text("RESPONSIVE DATA TABLE"),
         actions: [
           IconButton(
             onPressed: _initializeData,
-            icon: Icon(Icons.refresh_sharp),
+            icon: const Icon(Icons.refresh_sharp),
           ),
         ],
       ),
@@ -253,13 +255,13 @@ class _DataPageState extends State<DataPage> {
         child: ListView(
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text("home"),
+              leading: const Icon(Icons.home),
+              title: const Text("home"),
               onTap: () {},
             ),
             ListTile(
-              leading: Icon(Icons.storage),
-              title: Text("data"),
+              leading: const Icon(Icons.storage),
+              title: const Text("data"),
               onTap: () {},
             )
           ],
@@ -296,7 +298,7 @@ class _DataPageState extends State<DataPage> {
                             hintText:
                                 'Enter search term based on ${_searchKey!.replaceAll(RegExp('[\\W_]+'), ' ').toUpperCase()}',
                             prefixIcon: IconButton(
-                                icon: Icon(Icons.cancel),
+                                icon: const Icon(Icons.cancel),
                                 onPressed: () {
                                   setState(() {
                                     _isSearch = false;
@@ -304,14 +306,14 @@ class _DataPageState extends State<DataPage> {
                                   _initializeData();
                                 }),
                             suffixIcon: IconButton(
-                                icon: Icon(Icons.search), onPressed: () {})),
+                                icon: const Icon(Icons.search), onPressed: () {})),
                         onSubmitted: (value) {
                           _filterData(value);
                         },
                       )),
                     if (!_isSearch)
                       IconButton(
-                          icon: Icon(Icons.search),
+                          icon: const Icon(Icons.search),
                           onPressed: () {
                             setState(() {
                               _isSearch = true;
@@ -328,7 +330,7 @@ class _DataPageState extends State<DataPage> {
                   autoHeight: false,
                   dropContainer: (data) {
                     if (int.tryParse(data['id'].toString())!.isEven) {
-                      return Text("is Even");
+                      return const Text("is Even");
                     }
                     return _DropDownContainer(data: data);
                   },
@@ -388,12 +390,12 @@ class _DataPageState extends State<DataPage> {
                   },
                   footers: [
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Text("Rows per page:"),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: const Text("Rows per page:"),
                     ),
                     if (_perPages.isNotEmpty)
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: DropdownButton<int>(
                           value: _currentPerPage,
                           items: _perPages
@@ -413,12 +415,12 @@ class _DataPageState extends State<DataPage> {
                         ),
                       ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child:
                           Text("$_currentPage - $_currentPerPage of $_total"),
                     ),
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         size: 16,
                       ),
@@ -431,10 +433,10 @@ class _DataPageState extends State<DataPage> {
                                 _resetData(start: _currentPage - 1);
                               });
                             },
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                     ),
                     IconButton(
-                      icon: Icon(Icons.arrow_forward_ios, size: 16),
+                      icon: const Icon(Icons.arrow_forward_ios, size: 16),
                       onPressed: _currentPage + _currentPerPage! - 1 > _total
                           ? null
                           : () {
@@ -447,10 +449,10 @@ class _DataPageState extends State<DataPage> {
                                 _resetData(start: _nextSet - 1);
                               });
                             },
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                     )
                   ],
-                  headerDecoration: BoxDecoration(
+                  headerDecoration: const BoxDecoration(
                       color: Colors.grey,
                       border: Border(
                           bottom: BorderSide(color: Colors.red, width: 1))),
@@ -460,9 +462,9 @@ class _DataPageState extends State<DataPage> {
                             BorderSide(color: Colors.green[300]!, width: 1)),
                     color: Colors.green,
                   ),
-                  headerTextStyle: TextStyle(color: Colors.white),
-                  rowTextStyle: TextStyle(color: Colors.green),
-                  selectedTextStyle: TextStyle(color: Colors.white),
+                  headerTextStyle: const TextStyle(color: Colors.white),
+                  rowTextStyle: const TextStyle(color: Colors.green),
+                  selectedTextStyle: const TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -481,7 +483,7 @@ class _DropDownContainer extends StatelessWidget {
       Widget w = Row(
         children: [
           Text(entry.key.toString()),
-          Spacer(),
+          const Spacer(),
           Text(entry.value.toString()),
         ],
       );

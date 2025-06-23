@@ -454,7 +454,8 @@ class _XDataTableState extends State<XDataTable> {
                             (widget.showSelect && widget.selecteds != null),
                         showSort: (widget.showSort && widget.onSort != null)),
                     if (widget.isLoading) const LinearProgressIndicator(),
-                    if (widget.contentWidget!=null) widget.contentWidget??const SizedBox(),
+                    if (widget.contentWidget != null)
+                      widget.contentWidget ?? const SizedBox(),
                     ...mobileList(),
                   ],
                 ),
@@ -468,7 +469,9 @@ class _XDataTableState extends State<XDataTable> {
                               (widget.showSelect && widget.selecteds != null),
                           showSort: (widget.showSort && widget.onSort != null)),
                       if (widget.isLoading) const LinearProgressIndicator(),
-                      if (widget.contentWidget!=null) widget.contentWidget??const SizedBox(),
+                      if (widget.contentWidget != null)
+                        widget.contentWidget ?? const SizedBox(),
+
                       /// mobileList
                       ...mobileList(),
                     ],
@@ -508,8 +511,9 @@ class _XDataTableState extends State<XDataTable> {
               if (widget.headers.isNotEmpty) desktopHeader(),
 
               if (widget.isLoading) const LinearProgressIndicator(),
-              
-              if (widget.contentWidget!=null) widget.contentWidget??const SizedBox(),
+
+              if (widget.contentWidget != null)
+                widget.contentWidget ?? const SizedBox(),
 
               if (widget.autoHeight) Column(children: desktopList()),
 
