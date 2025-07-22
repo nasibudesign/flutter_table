@@ -5,30 +5,77 @@ import 'package:xtable/src/utils/utils.dart';
 import 'models/datatable_header.dart';
 
 class XDataTable extends StatefulWidget {
+  /// Whether to show the selection checkbox for each row.
   final bool showSelect;
+
+  /// List of headers for the datatable.
   final List<DatatableHeader> headers;
+
+  /// Data source for the datatable, each item is a map of column values.
   final List<Map<String, dynamic>>? source;
+
+  /// List of selected rows from the source.
   final List<Map<String, dynamic>>? selecteds;
+
+  /// Widget to display as the title of the datatable.
   final Widget? title;
+
+  /// List of action widgets to display in the datatable header.
   final List<Widget>? actions;
+
+  /// List of footer widgets to display at the bottom of the datatable.
   final List<Widget>? footers;
+
+  /// Callback when the select all checkbox is toggled.
   final Function(bool? value)? onSelectAll;
+
+  /// Callback when a row is selected or deselected.
   final Function(bool? value, Map<String, dynamic> data)? onSelect;
+
+  /// Callback when a row is tapped.
   final Function(Map<String, dynamic> value)? onTabRow;
+
+  /// Callback when a column is sorted.
   final Function(dynamic value)? onSort;
+
+  /// The column key currently used for sorting.
   final String? sortColumn;
+
+  /// Whether the sorting is ascending.
   final bool? sortAscending;
+
+  /// Whether the datatable is in a loading state.
   final bool isLoading;
+
+  /// Whether the datatable should automatically adjust its height.
   final bool autoHeight;
+
+  /// Whether to hide the underline in editable fields.
   final bool hideUnderline;
+
+  /// Whether to use the common mobile view layout.
   final bool commonMobileView;
-  final bool isExpandRows;
+
+  /// Whether to show the drop container on desktop when a row is tapped.
+  final bool showDropContainerOnDesktop;
+
+  /// Text to display for the sort menu.
   final String? sortText;
+
+  /// Whether to show the sort menu.
   final bool showSort;
+
+  /// List indicating which rows are expanded.
   final List<bool>? expanded;
+
+  /// Builder for the drop container widget for each row.
   final Widget Function(Map<String, dynamic> value)? dropContainer;
+
+  /// Callback when a row value is changed in an editable field.
   final Function(Map<String, dynamic> value, DatatableHeader header)?
       onChangedRow;
+
+  /// Callback when a row value is submitted in an editable field.
   final Function(Map<String, dynamic> value, DatatableHeader header)?
       onSubmittedRow;
 
@@ -98,7 +145,7 @@ class XDataTable extends StatefulWidget {
     this.autoHeight = true,
     this.hideUnderline = true,
     this.commonMobileView = false,
-    this.isExpandRows = true,
+    this.showDropContainerOnDesktop = true,
     this.expanded,
     this.dropContainer,
     this.onChangedRow,
@@ -123,6 +170,8 @@ class XDataTable extends StatefulWidget {
 }
 
 class _XDataTableState extends State<XDataTable> {
+
+
   Widget mobileHeader({required showSelect, required showSort}) {
     if (showSelect || showSort) {
       return Row(
@@ -413,7 +462,7 @@ class _XDataTableState extends State<XDataTable> {
               ),
             ),
           ),
-          if (widget.isExpandRows &&
+          if (widget.showDropContainerOnDesktop &&
               widget.expanded![index] &&
               widget.dropContainer != null)
             widget.dropContainer!(data)
