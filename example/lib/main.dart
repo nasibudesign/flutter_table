@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
 
 class DataPage extends StatefulWidget {
   const DataPage({Key? key}) : super(key: key);
+
   @override
   _DataPageState createState() => _DataPageState();
 }
@@ -49,6 +50,7 @@ class _DataPageState extends State<DataPage> {
   List<Map<String, dynamic>> _sourceFiltered = [];
   List<Map<String, dynamic>> _source = [];
   List<Map<String, dynamic>> _selecteds = [];
+
   // ignore: unused_field
   String _selectableKey = "id";
   String _sortText = "SORT BY";
@@ -69,7 +71,8 @@ class _DataPageState extends State<DataPage> {
       temps.add({
         "id": i,
         "sku": "$i\000$i",
-        "name": "Product $i with a very long exmaple of source builder here to show how it expand",
+        "name":
+            "Product $i with a very long exmaple of source builder here to show how it expand",
         "category": "Category-$i",
         "price": i * 10.00,
         "cost": "20.00",
@@ -165,7 +168,8 @@ class _DataPageState extends State<DataPage> {
           sortable: true,
           editable: false,
           textAlign: TextAlign.left,
-          sourceTextStyle:const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+          sourceTextStyle:
+              const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           format: DataTableFormat.number,
           textInputFormatter: []),
       DatatableHeader(
@@ -306,7 +310,8 @@ class _DataPageState extends State<DataPage> {
                                   _initializeData();
                                 }),
                             suffixIcon: IconButton(
-                                icon: const Icon(Icons.search), onPressed: () {})),
+                                icon: const Icon(Icons.search),
+                                onPressed: () {})),
                         onSubmitted: (value) {
                           _filterData(value);
                         },
@@ -324,6 +329,18 @@ class _DataPageState extends State<DataPage> {
                   source: _source,
                   selecteds: _selecteds,
                   showSelect: _showSelect,
+                  rowDecoration: (row) {
+                    if (row['id'] % 2 == 0) {
+                      return BoxDecoration(
+                        color: Colors.orange[100],
+                        border: const Border(
+                          bottom: BorderSide(color: Colors.grey, width: 1),
+                        ),
+                      );
+                    } else {
+                      return null;
+                    }
+                  },
                   showSort: _showSort,
                   sortText: _sortText,
                   contentWidget: const Icon(Icons.file_copy),
@@ -475,6 +492,7 @@ class _DataPageState extends State<DataPage> {
 
 class _DropDownContainer extends StatelessWidget {
   final Map<String, dynamic> data;
+
   const _DropDownContainer({Key? key, required this.data}) : super(key: key);
 
   @override

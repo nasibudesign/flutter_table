@@ -45,7 +45,7 @@ class XDataTable extends StatefulWidget {
   /// `rowDecoration`
   ///
   /// allow to decorate the data row
-  final BoxDecoration? rowDecoration;
+  final BoxDecoration? Function(Map<String, dynamic> value)? rowDecoration;
 
   /// `selectedDecoration`
   ///
@@ -181,7 +181,6 @@ class _XDataTableState extends State<XDataTable> {
   List<Widget> mobileList() {
     final decoration = BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.grey[300]!, width: 1)));
-    final rowDecoration = widget.rowDecoration ?? decoration;
     final selectedDecoration = widget.selectedDecoration ?? decoration;
     return widget.source!.map((data) {
       return InkWell(
@@ -189,7 +188,9 @@ class _XDataTableState extends State<XDataTable> {
         child: Container(
           decoration: widget.selecteds!.contains(data)
               ? selectedDecoration
-              : rowDecoration,
+              : widget.rowDecoration != null
+                  ? widget.rowDecoration!(data)
+                  : decoration,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -362,7 +363,9 @@ class _XDataTableState extends State<XDataTable> {
               padding: EdgeInsets.all(widget.showSelect ? 0 : 11),
               decoration: widget.selecteds!.contains(data)
                   ? selectedDecoration
-                  : rowDecoration,
+                  : widget.rowDecoration != null
+                      ? widget.rowDecoration!(data)
+                      : null,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -487,8 +490,8 @@ class _XDataTableState extends State<XDataTable> {
             ],
           )
         /**
-          * for large screen
-          */
+     * for large screen
+     */
         : Column(
             children: [
               //title and actions
@@ -671,6 +674,7 @@ class DropdownFieldWidget extends StatelessWidget {
   final Map<String, dynamic> data;
   final DatatableHeader header;
   final Function(Map<String, dynamic> vaue, DatatableHeader header)? func;
+
   @override
   Widget build(BuildContext context) {
     return Container(
